@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5hbtyoeqh6ku"]
+
+[ext_resource type="Script" uid="uid://daijgaoadmmj2" path="res://entities/mallet.gd" id="1_kdx6e"]
+[ext_resource type="Texture2D" uid="uid://dt46ndtt0lefm" path="res://assets/png/simple_puck.png" id="2_u252t"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kdx6e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3l1ip"]
+radius = 64.0
+
+[node name="Mallet" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_kdx6e")
+gravity_scale = 0.0
+script = ExtResource("1_kdx6e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3l1ip")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.3, 0.3, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_u252t")

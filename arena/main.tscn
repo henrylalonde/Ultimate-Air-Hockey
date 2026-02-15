@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://0w5vthgm872c"]
+
+[ext_resource type="Script" uid="uid://4pakgxe204ep" path="res://arena/input.gd" id="1_7f516"]
+[ext_resource type="Texture2D" uid="uid://cvvqxpf4r66dh" path="res://assets/png/ice.png" id="1_7ytbj"]
+[ext_resource type="Script" uid="uid://ceohkkciejfrc" path="res://arena/game_logic.gd" id="2_74d51"]
+[ext_resource type="PackedScene" uid="uid://c5hbtyoeqh6ku" path="res://entities/mallet.tscn" id="2_jqpg7"]
+[ext_resource type="PackedScene" uid="uid://dkucg6jq3kioe" path="res://entities/puck.tscn" id="5_74d51"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_74d51"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7gc3o"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dkq2s"]
+size = Vector2(568, 320)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7f516"]
+distance = -1080.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dkq2s"]
+normal = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74d51"]
+size = Vector2(440, 440)
+
+[node name="Main" type="Node"]
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("1_7f516")
+
+[node name="Game Logic" type="Node" parent="."]
+script = ExtResource("2_74d51")
+
+[node name="Ice Sprite" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_7ytbj")
+
+[node name="Player1" parent="." instance=ExtResource("2_jqpg7")]
+position = Vector2(551, 540)
+collision_layer = 4
+collision_mask = 5
+damping = 50.0
+proportional = 1000.0
+
+[node name="Puck" parent="." instance=ExtResource("5_74d51")]
+position = Vector2(960, 540)
+
+[node name="Player Boundaries" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="Left Boundary" type="CollisionShape2D" parent="Player Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_74d51")
+
+[node name="Right Boundary" type="CollisionShape2D" parent="Player Boundaries"]
+position = Vector2(1920, 0)
+shape = SubResource("WorldBoundaryShape2D_7gc3o")
+
+[node name="Puck Boundaries" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Top Left Goal" type="CollisionShape2D" parent="Puck Boundaries"]
+position = Vector2(-284, 160)
+shape = SubResource("RectangleShape2D_dkq2s")
+
+[node name="Bottom Left Goal" type="CollisionShape2D" parent="Puck Boundaries"]
+position = Vector2(-284, 920)
+shape = SubResource("RectangleShape2D_dkq2s")
+
+[node name="Top Right Goal" type="CollisionShape2D" parent="Puck Boundaries"]
+position = Vector2(2204, 160)
+shape = SubResource("RectangleShape2D_dkq2s")
+
+[node name="Bottom Right Goal" type="CollisionShape2D" parent="Puck Boundaries"]
+position = Vector2(2204, 920)
+shape = SubResource("RectangleShape2D_dkq2s")
+
+[node name="Common Boundaries" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 0
+
+[node name="Bottom Boundary" type="CollisionShape2D" parent="Common Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_7f516")
+
+[node name="Top Boundary" type="CollisionShape2D" parent="Common Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_dkq2s")
+
+[node name="Left Goal" type="Area2D" parent="."]
+position = Vector2(-348, 540)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Goal"]
+shape = SubResource("RectangleShape2D_74d51")
+
+[node name="Right Goal" type="Area2D" parent="."]
+position = Vector2(2268, 540)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Goal"]
+shape = SubResource("RectangleShape2D_74d51")
+
+[connection signal="body_entered" from="Left Goal" to="Game Logic" method="_on_left_goal_body_entered"]
+[connection signal="body_entered" from="Right Goal" to="Game Logic" method="_on_right_goal_body_entered"]

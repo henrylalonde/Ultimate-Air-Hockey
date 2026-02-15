@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkucg6jq3kioe"]
+
+[ext_resource type="Texture2D" uid="uid://dt46ndtt0lefm" path="res://assets/png/simple_puck.png" id="1_mvi3a"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkq2s"]
+friction = 0.2
+bounce = 0.9
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74d51"]
+radius = 64.0
+
+[node name="Puck" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 6
+physics_material_override = SubResource("PhysicsMaterial_dkq2s")
+gravity_scale = 0.0
+linear_damp = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_74d51")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.13, 0.13, 0.13, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_mvi3a")
