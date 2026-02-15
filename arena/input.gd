@@ -4,9 +4,8 @@ extends Node
 
 
 func _process(_delta: float) -> void:
-	if Input.is_key_pressed(KEY_ESCAPE):
+	if Input.is_action_pressed("ui_cancel"):
 		get_tree().quit()
-
 
 func _physics_process(_delta: float) -> void:
 	var mouse_position: Vector2 = get_viewport().get_mouse_position()

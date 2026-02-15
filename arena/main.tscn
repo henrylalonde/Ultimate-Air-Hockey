@@ -105,5 +105,72 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Goal"]
 shape = SubResource("RectangleShape2D_74d51")
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start Game" type="FoldableContainer" parent="UI"]
+layout_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 139.0
+offset_bottom = 165.0
+title = "Start Game"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Start Game"]
+layout_mode = 2
+
+[node name="Local Button" type="Button" parent="UI/Start Game/VBoxContainer"]
+layout_mode = 2
+text = "Local"
+
+[node name="LAN Button" type="Button" parent="UI/Start Game/VBoxContainer"]
+layout_mode = 2
+text = "LAN"
+
+[node name="Steam Buttom" type="Button" parent="UI/Start Game/VBoxContainer"]
+layout_mode = 2
+text = "Steam"
+
+[node name="Settings" type="FoldableContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -113.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = 64.0
+grow_horizontal = 0
+title = "Settings"
+
+[node name="GridContainer" type="GridContainer" parent="UI/Settings"]
+layout_mode = 2
+columns = 2
+
+[node name="Video" type="Label" parent="UI/Settings/GridContainer"]
+layout_mode = 2
+text = "Video"
+
+[node name="OptionButton" type="OptionButton" parent="UI/Settings/GridContainer"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+
+[node name="Label" type="Label" parent="UI/Settings/GridContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UI/Settings/GridContainer"]
+layout_mode = 2
+text = "Exit Game"
+
 [connection signal="body_entered" from="Left Goal" to="Game Logic" method="_on_left_goal_body_entered"]
 [connection signal="body_entered" from="Right Goal" to="Game Logic" method="_on_right_goal_body_entered"]
