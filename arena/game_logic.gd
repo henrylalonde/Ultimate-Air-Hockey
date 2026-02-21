@@ -8,8 +8,12 @@ var left_field := Vector2(540.0, 540.0)
 var right_field := Vector2(1380.0, 540.0)
 
 @onready var puck_scene: PackedScene = load("res://entities/puck.tscn")
-@onready var puck: RigidBody2D = get_parent().get_node("Puck")
+@onready var puck: RigidBody2D = $Puck
+@onready var score_board: ScoreBoard = $ScoreBoard
 
+
+func _ready() -> void:
+	score_board.start_display_timer(5.7)
 
 func reset_puck(reset_position: Vector2) -> void:
 	puck.queue_free()

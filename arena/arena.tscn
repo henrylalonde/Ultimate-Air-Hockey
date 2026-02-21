@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://0w5vthgm872c"]
+[gd_scene load_steps=19 format=3 uid="uid://0w5vthgm872c"]
 
 [ext_resource type="Script" uid="uid://4pakgxe204ep" path="res://arena/input.gd" id="1_44uaw"]
 [ext_resource type="Script" uid="uid://ceohkkciejfrc" path="res://arena/game_logic.gd" id="2_8d55x"]
 [ext_resource type="Texture2D" uid="uid://cvvqxpf4r66dh" path="res://assets/png/ice.png" id="3_x52g8"]
 [ext_resource type="PackedScene" uid="uid://c5hbtyoeqh6ku" path="res://entities/mallet.tscn" id="4_8m4co"]
 [ext_resource type="PackedScene" uid="uid://dkucg6jq3kioe" path="res://entities/puck.tscn" id="5_ts1j6"]
+[ext_resource type="StyleBox" uid="uid://p1oxfixiaoye" path="res://resources/score_board_box.tres" id="6_8d55x"]
+[ext_resource type="Script" uid="uid://bd2pxj36jcvmy" path="res://arena/score_board.gd" id="7_8m4co"]
+[ext_resource type="FontFile" uid="uid://vrey55mapj4a" path="res://assets/font/DSEG7Modern-Regular.ttf" id="7_x52g8"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_74d51"]
 normal = Vector2(1, 0)
@@ -24,13 +27,33 @@ normal = Vector2(0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74d51"]
 size = Vector2(440, 440)
 
+[sub_resource type="LabelSettings" id="LabelSettings_x52g8"]
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x52g8"]
+bg_color = Color(0.08078333, 0.08078336, 0.08078327, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_8m4co"]
+font = ExtResource("7_x52g8")
+font_size = 64
+font_color = Color(1, 0.16666669, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ts1j6"]
+font_size = 32
+
 [node name="Arena" type="Node"]
+script = ExtResource("2_8d55x")
 
 [node name="Input" type="Node" parent="."]
 script = ExtResource("1_44uaw")
-
-[node name="Game Logic" type="Node" parent="."]
-script = ExtResource("2_8d55x")
 
 [node name="Ice Sprite" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
@@ -38,14 +61,14 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_x52g8")
 
 [node name="Player1" parent="." instance=ExtResource("4_8m4co")]
-position = Vector2(551, 540)
+position = Vector2(215, 540)
 collision_layer = 4
 collision_mask = 5
 damping = 50.0
 proportional = 1000.0
 
 [node name="Player2" parent="." instance=ExtResource("4_8m4co")]
-position = Vector2(1384, 540)
+position = Vector2(1705, 540)
 collision_layer = 4
 collision_mask = 5
 damping = 50.0
@@ -112,5 +135,91 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Goal"]
 shape = SubResource("RectangleShape2D_74d51")
 
-[connection signal="body_entered" from="Left Goal" to="Game Logic" method="_on_left_goal_body_entered"]
-[connection signal="body_entered" from="Right Goal" to="Game Logic" method="_on_right_goal_body_entered"]
+[node name="ScoreBoard" type="PanelContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -307.0
+offset_top = 62.0
+offset_right = 307.0
+offset_bottom = 195.0
+grow_horizontal = 2
+pivot_offset = Vector2(307, 66.5)
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("6_8d55x")
+script = ExtResource("7_8m4co")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScoreBoard"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="HomeBox" type="VBoxContainer" parent="ScoreBoard/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HomeLabel" type="Label" parent="ScoreBoard/HBoxContainer/HomeBox"]
+layout_mode = 2
+text = "Home"
+label_settings = SubResource("LabelSettings_x52g8")
+horizontal_alignment = 1
+
+[node name="ScorePanel" type="PanelContainer" parent="ScoreBoard/HBoxContainer/HomeBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x52g8")
+
+[node name="HomeScore" type="Label" parent="ScoreBoard/HBoxContainer/HomeBox/ScorePanel"]
+layout_mode = 2
+text = "5"
+label_settings = SubResource("LabelSettings_8m4co")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TimePanel" type="PanelContainer" parent="ScoreBoard/HBoxContainer"]
+custom_minimum_size = Vector2(222, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_x52g8")
+
+[node name="TimeLabel" type="Label" parent="ScoreBoard/HBoxContainer/TimePanel"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0:01"
+label_settings = SubResource("LabelSettings_8m4co")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GuestBox" type="VBoxContainer" parent="ScoreBoard/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="GuestLabel" type="Label" parent="ScoreBoard/HBoxContainer/GuestBox"]
+layout_mode = 2
+text = "Guest"
+label_settings = SubResource("LabelSettings_ts1j6")
+horizontal_alignment = 1
+
+[node name="ScorePanel" type="PanelContainer" parent="ScoreBoard/HBoxContainer/GuestBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x52g8")
+
+[node name="GuestScore" type="Label" parent="ScoreBoard/HBoxContainer/GuestBox/ScorePanel"]
+layout_mode = 2
+text = "5"
+label_settings = SubResource("LabelSettings_8m4co")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SecondTimer" type="Timer" parent="ScoreBoard"]
+
+[connection signal="body_entered" from="Left Goal" to="." method="_on_left_goal_body_entered"]
+[connection signal="body_entered" from="Right Goal" to="." method="_on_right_goal_body_entered"]
+[connection signal="timeout" from="ScoreBoard/SecondTimer" to="ScoreBoard" method="_on_second_timer_timeout"]
