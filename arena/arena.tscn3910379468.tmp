@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0w5vthgm872c"]
+[gd_scene load_steps=20 format=3 uid="uid://0w5vthgm872c"]
 
 [ext_resource type="Script" uid="uid://4pakgxe204ep" path="res://arena/player_input.gd" id="1_44uaw"]
 [ext_resource type="Script" uid="uid://ceohkkciejfrc" path="res://arena/game_logic.gd" id="2_8d55x"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bd2pxj36jcvmy" path="res://arena/score_board.gd" id="7_8m4co"]
 [ext_resource type="FontFile" uid="uid://vrey55mapj4a" path="res://assets/font/DSEG7Modern-Regular.ttf" id="7_x52g8"]
 [ext_resource type="Script" uid="uid://dtf7u6do62tkq" path="res://arena/pause_menu.gd" id="8_8m4co"]
+[ext_resource type="Script" uid="uid://b4n0tihw2mee3" path="res://arena/win_menu.gd" id="9_ts1j6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_74d51"]
 normal = Vector2(1, 0)
@@ -189,7 +190,7 @@ label_settings = SubResource("LabelSettings_8m4co")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Menu" type="PanelContainer" parent="."]
+[node name="PauseMenu" type="PanelContainer" parent="."]
 process_mode = 3
 visible = false
 anchors_preset = 8
@@ -207,50 +208,89 @@ size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_8m4co")
 script = ExtResource("8_8m4co")
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Paused"
 label_settings = SubResource("LabelSettings_x52g8")
 
-[node name="ResumeButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Resume"
 
-[node name="ResetButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Reset"
-
-[node name="FullscreenToggle" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="FullscreenToggle" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 toggle_mode = true
 text = "Fullscreen"
 
-[node name="QuitButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="WinMenu" type="PanelContainer" parent="."]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.5
+offset_top = -137.0
+offset_right = 136.5
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_8m4co")
+script = ExtResource("9_ts1j6")
+
+[node name="MarginContainer" type="MarginContainer" parent="WinMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="WinLabel" type="Label" parent="WinMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "xx Wins!"
+label_settings = SubResource("LabelSettings_x52g8")
+
+[node name="RematchButton" type="Button" parent="WinMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Rematch"
+
+[node name="QuitButton" type="Button" parent="WinMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [connection signal="body_entered" from="GameObjects/Left Goal" to="." method="_on_left_goal_body_entered"]
 [connection signal="body_entered" from="GameObjects/Right Goal" to="." method="_on_right_goal_body_entered"]
-[connection signal="game_paused" from="Menu" to="PlayerObjects" method="_on_game_paused"]
-[connection signal="game_unpaused" from="Menu" to="PlayerObjects" method="_on_game_unpaused"]
-[connection signal="reset_game" from="Menu" to="." method="_on_menu_reset_game"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/ResumeButton" to="Menu" method="unpause_game"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/ResetButton" to="Menu" method="_on_reset_button_pressed"]
-[connection signal="toggled" from="Menu/MarginContainer/VBoxContainer/FullscreenToggle" to="Menu" method="_on_fullscreen_toggle_toggled"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]
+[connection signal="game_paused" from="PauseMenu" to="PlayerObjects" method="_on_game_paused"]
+[connection signal="game_unpaused" from="PauseMenu" to="PlayerObjects" method="_on_game_unpaused"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="PauseMenu" method="unpause_game"]
+[connection signal="toggled" from="PauseMenu/MarginContainer/VBoxContainer/FullscreenToggle" to="PauseMenu" method="_on_fullscreen_toggle_toggled"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="PauseMenu" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="WinMenu/MarginContainer/VBoxContainer/RematchButton" to="WinMenu" method="_on_rematch_button_pressed"]
+[connection signal="pressed" from="WinMenu/MarginContainer/VBoxContainer/QuitButton" to="WinMenu" method="_on_quit_button_pressed"]

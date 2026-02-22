@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkucg6jq3kioe"]
+[gd_scene load_steps=5 format=3 uid="uid://dkucg6jq3kioe"]
 
+[ext_resource type="Script" uid="uid://dt2l2mrmrc1eh" path="res://entities/puck.gd" id="1_0duwg"]
 [ext_resource type="Texture2D" uid="uid://dt46ndtt0lefm" path="res://assets/png/simple_puck.png" id="1_mvi3a"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkq2s"]
@@ -15,6 +16,7 @@ collision_mask = 6
 physics_material_override = SubResource("PhysicsMaterial_dkq2s")
 gravity_scale = 0.0
 linear_damp = 0.1
+script = ExtResource("1_0duwg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_74d51")

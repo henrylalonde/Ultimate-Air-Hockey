@@ -1,18 +1,14 @@
 [gd_resource type="StyleBoxFlat" format=3 uid="uid://p1oxfixiaoye"]
 
 [resource]
-bg_color = Color(0.33412242, 0.33412245, 0.3341224, 1)
+bg_color = Color(0.1476717, 0.14767182, 0.14767179, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
+border_color = Color(0.8862615, 0.8862615, 0.88626134, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-expand_margin_left = 32.0
-expand_margin_top = 32.0
-expand_margin_right = 32.0
-expand_margin_bottom = 32.0
 shadow_size = 8
