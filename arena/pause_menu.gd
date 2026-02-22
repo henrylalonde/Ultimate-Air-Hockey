@@ -9,7 +9,7 @@ signal reset_game
 @onready var label: Label = $MarginContainer/VBoxContainer/Label
 
 
-func show_win_message(message: String) -> void:
+func show_menu_message(message: String) -> void:
 	pause_game()
 	label.text = message
 

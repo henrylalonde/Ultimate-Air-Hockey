@@ -7,6 +7,8 @@ var middle_field := Vector2(960.0, 540.0)
 var left_field := Vector2(540.0, 540.0)
 var right_field := Vector2(1380.0, 540.0)
 
+var process_token: int = 0
+
 @onready var puck_scene: PackedScene = load("res://entities/puck.tscn")
 @onready var puck: RigidBody2D
 @onready var score_board: ScoreBoard = $ScoreBoard
@@ -21,9 +23,12 @@ func set_puck(reset_position: Vector2) -> void:
 
 
 func _ready() -> void:
+	process_token += 1
+	var local_token = process_token
 	score_board.peek_score(0, 0, 0, 0)
 	await score_board.score_board_hidden
-	set_puck(middle_field)
+	if process_token == local_token:
+		set_puck(middle_field)
 
 
 func _on_left_goal_body_entered(body: Node2D) -> void:
@@ -34,12 +39,16 @@ func _on_left_goal_body_entered(body: Node2D) -> void:
 	if p2_score >= 7:
 		score_board.show_score(p1_score, p1_score, p2_score, p2_score - 1)
 		await score_board.score_board_updated
-		menu.show_win_message("P2 Wins!")
+		menu.show_menu_message("P2 Wins!")
 	else:
+		
+		process_token += 1
+		var local_token = process_token
 		score_board.peek_score(p1_score, p1_score, p2_score, p2_score - 1)
 		await score_board.score_board_hidden
-		call_deferred("set_puck", left_field)
-		
+		if process_token == local_token:
+			call_deferred("set_puck", left_field)
+
 
 func _on_right_goal_body_entered(body: Node2D) -> void:
 	if body != puck:
@@ -49,18 +58,24 @@ func _on_right_goal_body_entered(body: Node2D) -> void:
 	if p1_score >= 7:
 		score_board.show_score(p1_score, p1_score - 1, p2_score, p2_score)
 		await score_board.score_board_updated
-		menu.show_win_message("P1 Wins!")
+		menu.show_menu_message("P1 Wins!")
 	else:
+		process_token += 1
+		var local_token = process_token
 		score_board.peek_score(p1_score, p1_score - 1, p2_score, p2_score)
 		await score_board.score_board_hidden
-		call_deferred("set_puck", right_field)
+		if process_token == local_token:
+			call_deferred("set_puck", right_field)
 
-# error when puck is freed by goal process and reset process, double free
+
 func _on_menu_reset_game() -> void:
 	p1_score = 0
 	p2_score = 0
-	puck.queue_free()
+	if is_instance_valid(puck):
+		puck.queue_free()
+	process_token += 1
+	var local_token = process_token
 	score_board.peek_score(0, 0, 0, 0)
 	await score_board.score_board_hidden
-	set_puck(middle_field)
-	
+	if process_token == local_token:
+		set_puck(middle_field)
