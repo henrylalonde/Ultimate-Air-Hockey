@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bllevwpvk0c3m"
+path="res://.godot/imported/Challenge Accepted Main Loop.ogg-6952e6d30b9bfe1faa551b7b976e9da1.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/ogg/Challenge Accepted Main Loop.ogg"
+dest_files=["res://.godot/imported/Challenge Accepted Main Loop.ogg-6952e6d30b9bfe1faa551b7b976e9da1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
