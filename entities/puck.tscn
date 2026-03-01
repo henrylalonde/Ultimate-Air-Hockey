@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkucg6jq3kioe"]
+[gd_scene load_steps=6 format=3 uid="uid://dkucg6jq3kioe"]
 
 [ext_resource type="Script" uid="uid://dt2l2mrmrc1eh" path="res://entities/puck.gd" id="1_0duwg"]
 [ext_resource type="Texture2D" uid="uid://dt46ndtt0lefm" path="res://assets/png/simple_puck.png" id="1_mvi3a"]
@@ -10,11 +10,15 @@ bounce = 0.9
 [sub_resource type="CircleShape2D" id="CircleShape2D_74d51"]
 radius = 64.0
 
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_0duwg"]
+
 [node name="Puck" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 6
 physics_material_override = SubResource("PhysicsMaterial_dkq2s")
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
 linear_damp = 0.1
 script = ExtResource("1_0duwg")
 
@@ -25,3 +29,9 @@ shape = SubResource("CircleShape2D_74d51")
 self_modulate = Color(0.13, 0.13, 0.13, 1)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_mvi3a")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPolyphonic_0duwg")
+autoplay = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

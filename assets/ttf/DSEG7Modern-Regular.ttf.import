@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://vrey55mapj4a"
-path="res://.godot/imported/DSEG7Modern-Regular.ttf-430a65a48e9ba461ee3e202924974721.fontdata"
+path="res://.godot/imported/DSEG7Modern-Regular.ttf-b89667da07560c88ba00d2cbe6cd1b04.fontdata"
 
 [deps]
 
-source_file="res://assets/font/DSEG7Modern-Regular.ttf"
-dest_files=["res://.godot/imported/DSEG7Modern-Regular.ttf-430a65a48e9ba461ee3e202924974721.fontdata"]
+source_file="res://assets/ttf/DSEG7Modern-Regular.ttf"
+dest_files=["res://.godot/imported/DSEG7Modern-Regular.ttf-b89667da07560c88ba00d2cbe6cd1b04.fontdata"]
 
 [params]
 
