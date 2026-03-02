@@ -20,7 +20,6 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	print(linear_velocity)
 	if body.is_in_group("wall"):
 		var volume_level: float = 4.2 * log(linear_velocity.length_squared() + 0.001) - 48.0
 		audio_stream_player.get_stream_playback().play_stream(light_wall_hit_sound, 0, volume_level)
