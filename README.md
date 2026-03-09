@@ -14,3 +14,7 @@
 
 * Add stamina bar to stop spamming. Slow people down if they consistently go too fast. Maybe have a circular ring around the edge of the mallet that fills up as the player whips around.
 * Add menu where players control two cursors which create fake input events to be processed by the control nodes.
+
+
+### Current Objectives
+* Make win screen with "activate" and "deactivate" methods to disable process, physics process, and hide() during game. Prevent area2Ds from messing stuff up.
