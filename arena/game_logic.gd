@@ -14,6 +14,7 @@ var process_token: int = 0
 @onready var score_board: ScoreBoard = $ScoreBoard
 @onready var game_objects: Node2D = $GameObjects
 @onready var menu: GameMenu = $Menu
+@onready var countdown_animation: AnimationPlayer = $Countdown/AnimationPlayer
 
 
 func set_puck(reset_position: Vector2) -> void:
@@ -23,10 +24,16 @@ func set_puck(reset_position: Vector2) -> void:
 
 
 func _ready() -> void:
+	start_game()
+
+
+func start_game() -> void:
 	process_token += 1
 	var local_token = process_token
-	score_board.peek_score(0, 0, 0, 0)
-	await score_board.score_board_hidden
+	if countdown_animation.is_playing():
+		countdown_animation.stop()
+	countdown_animation.play("countdown_animation")
+	await countdown_animation.animation_finished
 	if process_token == local_token:
 		set_puck(middle_field)
 
@@ -73,9 +80,4 @@ func _on_menu_reset_game() -> void:
 	p2_score = 0
 	if is_instance_valid(puck):
 		puck.queue_free()
-	process_token += 1
-	var local_token = process_token
-	score_board.peek_score(0, 0, 0, 0)
-	await score_board.score_board_hidden
-	if process_token == local_token:
-		set_puck(middle_field)
+	start_game()
