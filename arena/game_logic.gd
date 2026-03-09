@@ -13,7 +13,7 @@ var process_token: int = 0
 @onready var puck: RigidBody2D
 @onready var score_board: ScoreBoard = $ScoreBoard
 @onready var game_objects: Node2D = $GameObjects
-@onready var menu: GameMenu = $Menu
+@onready var pause_menu: PauseMenu = $PauseMenu
 @onready var countdown_animation: AnimationPlayer = $Countdown/AnimationPlayer
 
 
@@ -46,7 +46,7 @@ func _on_left_goal_body_entered(body: Node2D) -> void:
 	if p2_score >= 7:
 		score_board.show_score(p1_score, p1_score, p2_score, p2_score - 1)
 		await score_board.score_board_updated
-		menu.show_menu_message("P2 Wins!")
+		# menu.show_menu_message("P2 Wins!")
 	else:
 		
 		process_token += 1
@@ -65,7 +65,7 @@ func _on_right_goal_body_entered(body: Node2D) -> void:
 	if p1_score >= 7:
 		score_board.show_score(p1_score, p1_score - 1, p2_score, p2_score)
 		await score_board.score_board_updated
-		menu.show_menu_message("P1 Wins!")
+		# menu.show_menu_message("P1 Wins!")
 	else:
 		process_token += 1
 		var local_token = process_token

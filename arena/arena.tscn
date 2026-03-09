@@ -67,6 +67,45 @@ shadow_size = 16
 shadow_color = Color(0, 0, 0, 0.34901962)
 shadow_offset = Vector2(4, 4)
 
+[sub_resource type="Animation" id="Animation_mxqhn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Go!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_0310r"]
 resource_name = "countdown_animation"
 length = 4.0
@@ -134,45 +173,6 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 1, 2, 3)
 }
 tracks/3/use_blend = true
-
-[sub_resource type="Animation" id="Animation_mxqhn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Go!"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_57w3w"]
 _data = {
@@ -316,7 +316,7 @@ label_settings = SubResource("LabelSettings_8m4co")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Menu" type="PanelContainer" parent="."]
+[node name="PauseMenu" type="PanelContainer" parent="."]
 process_mode = 3
 visible = false
 anchors_preset = 8
@@ -334,40 +334,40 @@ size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_8m4co")
 script = ExtResource("8_8m4co")
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Paused"
 label_settings = SubResource("LabelSettings_x52g8")
 
-[node name="ResumeButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Resume"
 
-[node name="ResetButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="ResetButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Reset"
 
-[node name="FullscreenToggle" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="FullscreenToggle" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 toggle_mode = true
 text = "Fullscreen"
 
-[node name="QuitButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit"
@@ -381,7 +381,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.1212192, 1.1212192)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -398,7 +397,7 @@ offset_right = 36.5
 offset_bottom = 87.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "GO!"
+text = "Go!"
 label_settings = SubResource("LabelSettings_ts1j6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Countdown"]
@@ -409,6 +408,12 @@ libraries = {
 
 [node name="CountdownAudio" type="AudioStreamPlayer" parent="Countdown"]
 
+[node name="EndMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_ts1j6")
 autoplay = true
@@ -417,10 +422,10 @@ parameters/looping = true
 
 [connection signal="body_entered" from="GameObjects/Left Goal" to="." method="_on_left_goal_body_entered"]
 [connection signal="body_entered" from="GameObjects/Right Goal" to="." method="_on_right_goal_body_entered"]
-[connection signal="game_paused" from="Menu" to="PlayerObjects" method="_on_game_paused"]
-[connection signal="game_unpaused" from="Menu" to="PlayerObjects" method="_on_game_unpaused"]
-[connection signal="reset_game" from="Menu" to="." method="_on_menu_reset_game"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/ResumeButton" to="Menu" method="unpause_game"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/ResetButton" to="Menu" method="_on_reset_button_pressed"]
-[connection signal="toggled" from="Menu/MarginContainer/VBoxContainer/FullscreenToggle" to="Menu" method="_on_fullscreen_toggle_toggled"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]
+[connection signal="game_paused" from="PauseMenu" to="PlayerObjects" method="_on_game_paused"]
+[connection signal="game_unpaused" from="PauseMenu" to="PlayerObjects" method="_on_game_unpaused"]
+[connection signal="reset_game" from="PauseMenu" to="." method="_on_menu_reset_game"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="PauseMenu" method="unpause_game"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/ResetButton" to="PauseMenu" method="_on_reset_button_pressed"]
+[connection signal="toggled" from="PauseMenu/MarginContainer/VBoxContainer/FullscreenToggle" to="PauseMenu" method="_on_fullscreen_toggle_toggled"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="PauseMenu" method="_on_quit_button_pressed"]

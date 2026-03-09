@@ -1,4 +1,4 @@
-class_name GameMenu
+class_name PauseMenu
 extends PanelContainer
 
 signal game_unpaused
@@ -7,11 +7,6 @@ signal reset_game
 
 @onready var fullscreen_button: Button = $MarginContainer/VBoxContainer/FullscreenToggle
 @onready var label: Label = $MarginContainer/VBoxContainer/Label
-
-
-func show_menu_message(message: String) -> void:
-	pause_game()
-	label.text = message
 
 
 func unpause_game() -> void:
