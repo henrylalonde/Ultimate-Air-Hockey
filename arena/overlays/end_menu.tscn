@@ -1,0 +1,150 @@
+[gd_scene load_steps=10 format=3 uid="uid://hb7ravns77rt"]
+
+[ext_resource type="FontFile" uid="uid://dcw5d5m5g2jtb" path="res://assets/ttf/Bungee-Regular.ttf" id="1_i87rq"]
+[ext_resource type="Script" uid="uid://duxpnuvatn1hr" path="res://arena/overlays/end_menu.gd" id="1_qp2no"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8m4co"]
+font = ExtResource("1_i87rq")
+font_size = 156
+font_color = Color(0.8627451, 0.21960784, 0.21960784, 1)
+outline_size = 32
+outline_color = Color(0.08, 0.08, 0.08, 1)
+
+[sub_resource type="Animation" id="Animation_qp2no"]
+resource_name = "celebrate"
+length = 3.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextControl:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.15, 0.15),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_pisr8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextControl:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0q038"]
+_data = {
+&"RESET": SubResource("Animation_pisr8"),
+&"celebrate": SubResource("Animation_qp2no")
+}
+
+[sub_resource type="Gradient" id="Gradient_qp2no"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.7, 0.7, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pisr8"]
+gradient = SubResource("Gradient_qp2no")
+width = 32
+height = 8
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0q038"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1000, 5, 1)
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 242.42
+gravity = Vector3(0, 98, 0)
+linear_accel_min = -43.43
+linear_accel_max = 38.379997
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.99999994
+turbulence_noise_strength = 0.01
+
+[node name="EndMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qp2no")
+
+[node name="TextControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -200.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+
+[node name="BigText" type="Label" parent="TextControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -372.0
+offset_top = -103.5
+offset_right = 372.0
+offset_bottom = 103.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "P1 Wins!"
+label_settings = SubResource("LabelSettings_8m4co")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0q038")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -575)
+amount = 64
+texture = SubResource("GradientTexture2D_pisr8")
+lifetime = 10.0
+explosiveness = 0.7
+process_material = SubResource("ParticleProcessMaterial_0q038")

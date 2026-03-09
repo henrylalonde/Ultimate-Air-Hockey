@@ -10,11 +10,16 @@ var right_field := Vector2(1380.0, 540.0)
 var process_token: int = 0
 
 @onready var puck_scene: PackedScene = load("res://entities/puck.tscn")
+@onready var countdown_scene: PackedScene = load("res://arena/overlays/countdown.tscn")
+@onready var end_menu_scene: PackedScene = load("res://arena/overlays/end_menu.tscn")
+
 @onready var puck: RigidBody2D
+@onready var countdown: Countdown
+@onready var end_menu: EndMenu
+
 @onready var score_board: ScoreBoard = $ScoreBoard
 @onready var game_objects: Node2D = $GameObjects
 @onready var pause_menu: PauseMenu = $PauseMenu
-@onready var countdown_animation: AnimationPlayer = $Countdown/AnimationPlayer
 
 
 func set_puck(reset_position: Vector2) -> void:
@@ -30,10 +35,13 @@ func _ready() -> void:
 func start_game() -> void:
 	process_token += 1
 	var local_token = process_token
-	if countdown_animation.is_playing():
-		countdown_animation.stop()
-	countdown_animation.play("countdown_animation")
-	await countdown_animation.animation_finished
+	score_board.peek_score(0, 0, 0, 0)
+	if is_instance_valid(countdown):
+		countdown.reset()
+	else:
+		countdown = countdown_scene.instantiate()
+		add_child(countdown)
+	await countdown.countdown_finished
 	if process_token == local_token:
 		set_puck(middle_field)
 
@@ -46,9 +54,8 @@ func _on_left_goal_body_entered(body: Node2D) -> void:
 	if p2_score >= 7:
 		score_board.show_score(p1_score, p1_score, p2_score, p2_score - 1)
 		await score_board.score_board_updated
-		# menu.show_menu_message("P2 Wins!")
+		display_end_menu("P2 Wins!")
 	else:
-		
 		process_token += 1
 		var local_token = process_token
 		score_board.peek_score(p1_score, p1_score, p2_score, p2_score - 1)
@@ -65,7 +72,7 @@ func _on_right_goal_body_entered(body: Node2D) -> void:
 	if p1_score >= 7:
 		score_board.show_score(p1_score, p1_score - 1, p2_score, p2_score)
 		await score_board.score_board_updated
-		# menu.show_menu_message("P1 Wins!")
+		display_end_menu("P1 Wins!")
 	else:
 		process_token += 1
 		var local_token = process_token
@@ -81,3 +88,14 @@ func _on_menu_reset_game() -> void:
 	if is_instance_valid(puck):
 		puck.queue_free()
 	start_game()
+
+
+func display_end_menu(big_text: String) -> void:
+	if is_instance_valid(end_menu):
+		pass
+	else:
+		end_menu = end_menu_scene.instantiate()
+		end_menu.big_text = big_text
+		pause_menu.reset_game.connect(end_menu.queue_free)
+		add_child(end_menu)
+	
