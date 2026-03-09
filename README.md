@@ -17,4 +17,4 @@
 
 
 ### Current Objectives
-* Make win screen a separate scene that only displays at the end of the game
+* Make win screen with "activate" and "deactivate" methods to disable process, physics process, and hide() during game. Prevent area2Ds from messing stuff up.
