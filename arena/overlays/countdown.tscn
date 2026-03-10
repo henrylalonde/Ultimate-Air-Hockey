@@ -154,7 +154,7 @@ offset_right = 36.5
 offset_bottom = 87.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Go!"
+text = "3"
 label_settings = SubResource("LabelSettings_ts1j6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
