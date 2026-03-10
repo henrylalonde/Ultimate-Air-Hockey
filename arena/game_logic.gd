@@ -9,9 +9,9 @@ var right_field := Vector2(1380.0, 540.0)
 
 var process_token: int = 0
 
-@onready var puck_scene: PackedScene = load("res://entities/puck.tscn")
-@onready var countdown_scene: PackedScene = load("res://arena/overlays/countdown.tscn")
-@onready var end_menu_scene: PackedScene = load("res://arena/overlays/end_menu.tscn")
+@onready var puck_scene: PackedScene = preload("res://entities/puck.tscn")
+@onready var countdown_scene: PackedScene = preload("res://arena/overlays/countdown.tscn")
+@onready var end_menu_scene: PackedScene = preload("res://arena/overlays/end_menu.tscn")
 
 @onready var puck: RigidBody2D
 @onready var countdown: Countdown

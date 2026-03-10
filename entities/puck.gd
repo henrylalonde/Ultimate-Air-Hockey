@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-@onready var light_mallet_hit_sound: AudioStreamWAV = load("res://assets/wav/light_mallet_hit.wav")
-@onready var light_wall_hit_sound: AudioStreamWAV = load("res://assets/wav/light_wall_hit.wav")
+@onready var light_mallet_hit_sound: AudioStreamWAV = preload("res://assets/wav/light_mallet_hit.wav")
+@onready var light_wall_hit_sound: AudioStreamWAV = preload("res://assets/wav/light_wall_hit.wav")
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var audio_stream_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
