@@ -70,7 +70,7 @@ _data = {
 
 [sub_resource type="Gradient" id="Gradient_staqi"]
 offsets = PackedFloat32Array(0.78853047, 0.8530466, 0.89605737, 0.953405)
-colors = PackedColorArray(0.42000002, 0.61333346, 1, 0, 0.42000002, 0.61333346, 1, 1, 0.41960785, 0.6117647, 1, 1, 0.42000002, 0.61333346, 1, 0)
+colors = PackedColorArray(0.42000002, 0.61333346, 1, 0, 0.42000002, 0.61333346, 1, 0.5019608, 0.42000002, 0.61333346, 1, 0.5019608, 0.42000002, 0.61333346, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_1isqk"]
 gradient = SubResource("Gradient_staqi")
