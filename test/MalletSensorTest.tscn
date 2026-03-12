@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsa1jsqe1mxlr"]
+
+[ext_resource type="Script" uid="uid://bdqijah32p0yx" path="res://test/mallet_sensor_test.gd" id="1_ekf44"]
+[ext_resource type="PackedScene" uid="uid://bdsyls4fic408" path="res://entities/mallet_sensor.tscn" id="1_kd246"]
+[ext_resource type="PackedScene" uid="uid://c5hbtyoeqh6ku" path="res://entities/mallet.tscn" id="3_6hviv"]
+
+[node name="MalletSensorTest" type="Node2D"]
+script = ExtResource("1_ekf44")
+
+[node name="MalletSensor" parent="." instance=ExtResource("1_kd246")]
+position = Vector2(956, 472)
+
+[node name="Mallet" parent="." instance=ExtResource("3_6hviv")]
+position = Vector2(322, 425)

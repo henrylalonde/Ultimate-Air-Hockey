@@ -33,6 +33,8 @@ func _ready() -> void:
 
 
 func start_game() -> void:
+	p1_score = 0
+	p2_score = 0
 	process_token += 1
 	var local_token = process_token
 	score_board.peek_score(0, 0, 0, 0)
@@ -83,8 +85,6 @@ func _on_right_goal_body_entered(body: Node2D) -> void:
 
 
 func _on_menu_reset_game() -> void:
-	p1_score = 0
-	p2_score = 0
 	if is_instance_valid(puck):
 		puck.queue_free()
 	start_game()
@@ -96,6 +96,8 @@ func display_end_menu(big_text: String) -> void:
 	else:
 		end_menu = end_menu_scene.instantiate()
 		end_menu.big_text = big_text
+		end_menu.rematch_selected.connect(start_game)
+		end_menu.quit_selected.connect(get_tree().quit)
 		pause_menu.reset_game.connect(end_menu.queue_free)
 		add_child(end_menu)
 	
