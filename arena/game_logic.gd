@@ -9,6 +9,7 @@ var right_field := Vector2(1380.0, 540.0)
 
 var process_token: int = 0
 
+@onready var main_menu_scene: PackedScene = load("res://menu/menu.tscn")
 @onready var puck_scene: PackedScene = preload("res://entities/puck.tscn")
 @onready var countdown_scene: PackedScene = preload("res://arena/overlays/countdown.tscn")
 @onready var end_menu_scene: PackedScene = preload("res://arena/overlays/end_menu.tscn")
@@ -35,17 +36,26 @@ func _ready() -> void:
 func start_game() -> void:
 	p1_score = 0
 	p2_score = 0
+	
 	process_token += 1
 	var local_token = process_token
+	
 	score_board.peek_score(0, 0, 0, 0)
+	if is_instance_valid(puck):
+		puck.queue_free()
 	if is_instance_valid(countdown):
 		countdown.reset()
 	else:
 		countdown = countdown_scene.instantiate()
 		add_child(countdown)
 	await countdown.countdown_finished
+	
 	if process_token == local_token:
 		set_puck(middle_field)
+
+
+func quit_game() -> void:
+	get_tree().change_scene_to_packed(main_menu_scene)
 
 
 func _on_left_goal_body_entered(body: Node2D) -> void:
@@ -84,12 +94,6 @@ func _on_right_goal_body_entered(body: Node2D) -> void:
 			call_deferred("set_puck", right_field)
 
 
-func _on_menu_reset_game() -> void:
-	if is_instance_valid(puck):
-		puck.queue_free()
-	start_game()
-
-
 func display_end_menu(big_text: String) -> void:
 	if is_instance_valid(end_menu):
 		pass
@@ -97,7 +101,7 @@ func display_end_menu(big_text: String) -> void:
 		end_menu = end_menu_scene.instantiate()
 		end_menu.big_text = big_text
 		end_menu.rematch_selected.connect(start_game)
-		end_menu.quit_selected.connect(get_tree().quit)
+		end_menu.quit_selected.connect(quit_game)
 		pause_menu.reset_game.connect(end_menu.queue_free)
 		add_child(end_menu)
 	

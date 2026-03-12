@@ -110,6 +110,7 @@ collision_mask = 5
 [node name="ScoreBoard" parent="." instance=ExtResource("5_lebtn")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_lebtn")]
+visible = false
 z_index = 1
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
@@ -122,4 +123,5 @@ parameters/looping = true
 [connection signal="body_entered" from="GameObjects/Right Goal" to="." method="_on_right_goal_body_entered"]
 [connection signal="game_paused" from="PauseMenu" to="PlayerObjects" method="_on_game_paused"]
 [connection signal="game_unpaused" from="PauseMenu" to="PlayerObjects" method="_on_game_unpaused"]
-[connection signal="reset_game" from="PauseMenu" to="." method="_on_menu_reset_game"]
+[connection signal="quit_game" from="PauseMenu" to="." method="quit_game"]
+[connection signal="reset_game" from="PauseMenu" to="." method="start_game"]

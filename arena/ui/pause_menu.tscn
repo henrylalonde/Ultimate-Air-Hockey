@@ -1,20 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://d4v8vpuom1pw"]
 
+[ext_resource type="Theme" uid="uid://b5t781h4qcn1p" path="res://resources/menu_theme.tres" id="1_6r2it"]
 [ext_resource type="Script" uid="uid://dtf7u6do62tkq" path="res://arena/ui/pause_menu.gd" id="1_50142"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8m4co"]
-bg_color = Color(0.27, 0.27, 0.27, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [sub_resource type="LabelSettings" id="LabelSettings_x52g8"]
 font_size = 64
 
 [node name="PauseMenu" type="PanelContainer"]
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -27,7 +20,7 @@ offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_8m4co")
+theme = ExtResource("1_6r2it")
 script = ExtResource("1_50142")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

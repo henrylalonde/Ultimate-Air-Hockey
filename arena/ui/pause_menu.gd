@@ -4,6 +4,7 @@ extends PanelContainer
 signal game_unpaused
 signal game_paused
 signal reset_game
+signal quit_game
 
 @onready var fullscreen_button: Button = $MarginContainer/VBoxContainer/FullscreenToggle
 @onready var label: Label = $MarginContainer/VBoxContainer/Label
@@ -50,4 +51,5 @@ func _on_fullscreen_toggle_toggled(toggled_on: bool) -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	get_tree().quit()
+	unpause_game()
+	quit_game.emit()

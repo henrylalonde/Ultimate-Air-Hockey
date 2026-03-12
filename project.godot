@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ultimate Air Hockey"
-run/main_scene="uid://0w5vthgm872c"
+run/main_scene="uid://dk43d4g7s1no8"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://cvvqxpf4r66dh"
 
@@ -23,6 +23,7 @@ RawMouseAutoload="*res://autoloads/RawMouseAutoload.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 
