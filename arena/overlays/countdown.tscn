@@ -2,8 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://dcw5d5m5g2jtb" path="res://assets/ttf/Bungee-Regular.ttf" id="1_1gsxt"]
 [ext_resource type="Script" uid="uid://c6vqpc3nylk0n" path="res://arena/overlays/countdown.gd" id="1_r5tqk"]
-[ext_resource type="AudioStream" uid="uid://cvy82iarxags7" path="res://assets/ogg/Scoreboard Buzzer Low.ogg" id="3_r5tqk"]
-[ext_resource type="AudioStream" uid="uid://dpd5v2nnn7oy7" path="res://assets/ogg/Scoreboard Buzzer High.ogg" id="4_56wvw"]
+[ext_resource type="AudioStream" uid="uid://chh7xbu3x2b2t" path="res://assets/ogg/Scoreboard Buzzer Low.ogg" id="3_r5tqk"]
+[ext_resource type="AudioStream" uid="uid://bh77eyflvbkt5" path="res://assets/ogg/Scoreboard Buzzer High.ogg" id="4_56wvw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ts1j6"]
 font = ExtResource("1_1gsxt")
@@ -129,6 +129,7 @@ _data = {
 }
 
 [node name="Countdown" type="Control"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -137,6 +138,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_r5tqk")
@@ -154,7 +156,7 @@ offset_right = 36.5
 offset_bottom = 87.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "3"
+text = "GO!"
 label_settings = SubResource("LabelSettings_ts1j6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
