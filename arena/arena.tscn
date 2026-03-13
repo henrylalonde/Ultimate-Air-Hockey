@@ -114,6 +114,7 @@ visible = false
 z_index = 1
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("9_ts1j6")
 autoplay = true
 bus = &"Music"

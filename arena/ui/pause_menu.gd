@@ -1,13 +1,13 @@
 class_name PauseMenu
-extends PanelContainer
+extends Control
 
 signal game_unpaused
 signal game_paused
 signal reset_game
 signal quit_game
 
-@onready var fullscreen_button: Button = $MarginContainer/VBoxContainer/FullscreenToggle
-@onready var label: Label = $MarginContainer/VBoxContainer/Label
+@onready var pause_buttons := $PauseButtons
+@onready var options_menu := $OptionsMenu
 
 
 func unpause_game() -> void:
@@ -17,25 +17,23 @@ func unpause_game() -> void:
 
 
 func pause_game() -> void:
-	label.text = "Paused"
 	get_tree().paused = true
 	game_paused.emit()
 	show()
 
 
 func _ready() -> void:
-	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-		fullscreen_button.button_pressed = true
-	else:
-		fullscreen_button.button_pressed = false
+	pass
 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
-		if get_tree().paused:
-			unpause_game()
-		else:
+		if not get_tree().paused:
 			pause_game()
+		elif options_menu.is_visible_in_tree():
+			_on_options_menu_back_button_pressed()
+		else:
+			unpause_game()
 
 
 func _on_reset_button_pressed() -> void:
@@ -43,11 +41,14 @@ func _on_reset_button_pressed() -> void:
 	reset_game.emit()
 
 
-func _on_fullscreen_toggle_toggled(toggled_on: bool) -> void:
-	if toggled_on:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+func _on_options_button_pressed() -> void:
+	pause_buttons.hide()
+	options_menu.show()
+
+
+func _on_options_menu_back_button_pressed() -> void:
+	options_menu.hide()
+	pause_buttons.show()
 
 
 func _on_quit_button_pressed() -> void:

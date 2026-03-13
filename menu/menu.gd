@@ -4,6 +4,8 @@ extends Node
 
 @onready var p1_mouse_indicator: TextureRect = $UI/MouseCheck/MarginContainer/VBoxContainer/P1MouseCheck/TextureRect
 @onready var p2_mouse_indicator: TextureRect = $UI/MouseCheck/MarginContainer/VBoxContainer/P2MouseCheck/TextureRect
+@onready var main_menu: VBoxContainer = $UI/MainMenu
+@onready var options_menu: PanelContainer = $UI/OptionsMenu
 
 var connected_color: Color = Color("37db37ff")
 var disconnected_color: Color = Color("dc3838ff")
@@ -29,6 +31,16 @@ func _ready() -> void:
 
 func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_packed(arena_scene)
+
+
+func _on_options_button_pressed() -> void:
+	main_menu.hide()
+	options_menu.show()
+
+
+func _on_options_menu_back_button_pressed() -> void:
+	options_menu.hide()
+	main_menu.show()
 
 
 func _on_exit_button_pressed() -> void:

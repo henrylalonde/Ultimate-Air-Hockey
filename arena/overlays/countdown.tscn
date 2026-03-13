@@ -129,7 +129,6 @@ _data = {
 }
 
 [node name="Countdown" type="Control"]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -138,7 +137,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_r5tqk")
@@ -156,7 +154,7 @@ offset_right = 36.5
 offset_bottom = 87.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "GO!"
+text = "Go!"
 label_settings = SubResource("LabelSettings_ts1j6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -166,5 +164,6 @@ libraries = {
 }
 
 [node name="CountdownAudio" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
