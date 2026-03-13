@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dpd5v2nnn7oy7"
+path="res://.godot/imported/Scoreboard Buzzer High.ogg-0c11ce4d7049f7782451acfc229c89c6.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/ogg/Scoreboard Buzzer High.ogg"
+dest_files=["res://.godot/imported/Scoreboard Buzzer High.ogg-0c11ce4d7049f7782451acfc229c89c6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
