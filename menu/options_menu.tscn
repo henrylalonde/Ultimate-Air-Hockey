@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ww4ixsf0iiwb"]
+[gd_scene load_steps=3 format=3 uid="uid://ww4ixsf0iiwb"]
 
 [ext_resource type="Script" uid="uid://dudkysa8nys7d" path="res://menu/options_menu.gd" id="1_owp0g"]
+[ext_resource type="Theme" uid="uid://b5t781h4qcn1p" path="res://resources/menu_theme.tres" id="1_wjlk6"]
 
 [node name="OptionsMenu" type="PanelContainer"]
 visible = false
@@ -15,6 +16,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_wjlk6")
 script = ExtResource("1_owp0g")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -31,47 +33,56 @@ theme_override_constants/separation = 16
 [node name="OptionsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Options"
 
 [node name="VolumeOptions" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 columns = 2
 
 [node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VolumeOptions"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_vertical = 1
 max_value = 1.0
 step = 0.0
 value = 1.0
 
 [node name="MasterVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeOptions"]
 layout_mode = 2
-text = "Master Volume"
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 24
+text = "Master"
 
 [node name="MusicVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VolumeOptions"]
 layout_mode = 2
+size_flags_vertical = 1
 max_value = 1.0
 step = 0.0
 value = 1.0
 
 [node name="MusicVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeOptions"]
 layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 24
 text = "Music"
 
 [node name="SFXVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VolumeOptions"]
 layout_mode = 2
+size_flags_vertical = 1
 max_value = 1.0
 step = 0.0
 value = 1.0
 
 [node name="SFXVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeOptions"]
 layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 24
 text = "SFX"
 
 [node name="FullScreenButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 toggle_mode = true
 text = "Fullscreen"
 
