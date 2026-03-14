@@ -80,7 +80,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 shadow_color = Color(0, 0, 0, 0.5019608)
-shadow_size = 4
+shadow_size = 1
 shadow_offset = Vector2(4, 4)
 
 [resource]
