@@ -36,6 +36,11 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
 text = "Options"
 
+[node name="AudioLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Audio"
+
 [node name="VolumeOptions" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -80,6 +85,11 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 24
 text = "SFX"
+
+[node name="VideoLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Video"
 
 [node name="FullScreenButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -33,9 +33,14 @@ func _on_volume_slider_value_changed(value: float, index: int) -> void:
 func _on_full_screen_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		ProjectSettings.set_setting("display/window/size/mode", DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		ProjectSettings.set_setting("display/window/size/mode", DisplayServer.WINDOW_MODE_WINDOWED)
+
 
 
 func _on_back_button_pressed() -> void:
+	ResourceSaver.save(AudioServer.generate_bus_layout(), "default_bus_layout.tres")
+	ProjectSettings.save()
 	back_button_pressed.emit()
