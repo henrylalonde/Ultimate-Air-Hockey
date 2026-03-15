@@ -18,6 +18,7 @@ config/icon="uid://cvvqxpf4r66dh"
 [autoload]
 
 RawMouseAutoload="*res://autoloads/RawMouseAutoload.tscn"
+SettingsLoader="*res://autoloads/settings_loader.gd"
 
 [display]
 
